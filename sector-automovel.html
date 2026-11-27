@@ -28,7 +28,7 @@ function pafeFallback(category){
 document.querySelectorAll('.carousel').forEach(function(carousel){
  const slides=Array.from(carousel.querySelectorAll('img'));
  const category=carousel.closest('.card').querySelector('h3').textContent.trim();
- slides.forEach(function(img){img.addEventListener('error',function(){if(img.dataset.fallbackApplied)return;img.dataset.fallbackApplied='1';img.src=pafeFallback(category);});});
+ slides.forEach(function(img,index){img.onerror=null;img.src=pafeFallback(category);img.alt=category+' — ilustração '+(index+1);img.loading='eager';});
  if(slides.length<2)return;let current=0;
  setInterval(function(){slides[current].classList.remove('active');current=(current+1)%slides.length;slides[current].classList.add('active');},5000);
 });
